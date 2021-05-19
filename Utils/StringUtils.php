@@ -9,6 +9,8 @@
 // *
 // ****************************************************************************
 
+namespace De\Xovatec\Utils;
+
 /**
  * Utils-Klasse für Strings
  * 
@@ -16,7 +18,7 @@
  * @copyright hobutech // www.hobutech.de
  *
  */
-class hobulib_Utils_String {
+class StringUtils {
 	
 	
 	/**

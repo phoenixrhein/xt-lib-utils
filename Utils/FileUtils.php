@@ -9,6 +9,8 @@
 // *
 // ****************************************************************************
 
+namespace De\Xovatec\Utils;
+
 /**
  * File Utils-Klasse
  * 
@@ -16,7 +18,7 @@
  * @copyright hobutech // www.hobutech.de
  *
  */
-class hobulib_Utils_File {
+class FileUtils {
 	
 	/**
 	 * Saubert den Namen von Umlauten und Sonderzeichen

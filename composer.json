@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "de\\xovatec\\xtlib\\utils\\": "utils"
+            "De\\Xovatec\\Utils\\": "Utils"
         }
     }
 }

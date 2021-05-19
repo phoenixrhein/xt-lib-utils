@@ -9,6 +9,8 @@
 // *
 // ****************************************************************************
 
+namespace De\Xovatec\Utils;
+
 
 /**
  * Directory Util Klasse
@@ -16,7 +18,7 @@
  * @author User
  *
  */
-class hobulib_Utils_Directory {
+class DirectoryUtils {
 	
 	/**
 	 * @var string

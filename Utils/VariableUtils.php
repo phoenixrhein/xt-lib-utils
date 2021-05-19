@@ -9,6 +9,8 @@
 // *
 // ****************************************************************************
 
+namespace De\Xovatec\Utils;
+
 /**
  * Variablen Util-Klasse
  * 
@@ -16,7 +18,7 @@
  * @copyright hobutech // www.hobutech.de
  *
  */
-class hobulib_Utils_Variable {
+class VariableUtils {
 	
 	
 	/**
