@@ -10,9 +10,11 @@
         }
     ],
     "require": {
-        "php": "^5.3"
+        "php": ">=5.4"
     },
     "autoload": {
-        "classmap": ["Utils/"]
+        "psr-4": {
+            "de\\xovatec\\xtlib\\utils\\": "utils"
+        }
     }
 }
