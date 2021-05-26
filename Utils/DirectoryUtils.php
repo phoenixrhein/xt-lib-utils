@@ -1,122 +1,128 @@
 <?php
-// ############################################################################
-// *										   				 				  *											
-// *                      Copyright (C) 2016 HoBuTech		 				  *
-// *										   				 				  *
-// ############################################################################
-// *										
-// * 
-// *
-// ****************************************************************************
+
+/*
+ * 
+ * (c) xt <Bastian Hohmann> 
+ * 
+ * @link http://www.xovatec.de
+ * 
+ */
 
 namespace De\Xovatec\Utils;
 
+use UnexpectedValueException;
 
 /**
- * Directory Util Klasse
+ * Directory Utils
  * 
- * @author User
+ * @author Bastian Hohmann <xt>
+ * @copyright xovatec // www.xovatec.de
  *
  */
-class DirectoryUtils {
-	
-	/**
-	 * @var string
-	 */
-	private $path = null;
-	
-	/**
-	 * Directory Util Klasse / Constructor
-	 * 
-	 * @param string $path
-	 * @throws hobucms_Exception
-	 */
-	public function __construct($path) {
-		
-		if(!is_dir($path)) {
-			throw new hobucms_Exception("'$path' ist kein Verzeichnis");
-		}
-		
-		if(!file_exists($path)) {
-			throw new hobucms_Exception("Das Verzeichnis '$path' existoert nicht");
-		}
-		
-		$this->path = $path;
-	}
-	
-	/**
-	 * Liest die Datein ein dem Verzeichnis aus
-	 * 
-	 * @return array 
-	 */
-	public function readFiles() {
-		$files = array();
-		if ($handle = opendir($this->path)) {
-		
-			while (false !== ($file = readdir($handle))) {
-				if(is_dir($this->path.'/'.$file)) {
-					continue;
-				}
-			
-				$files[] = $file;
-			}
+class DirectoryUtils
+{
 
-			closedir($handle);
-		}
-		return $files;
-	}
-	
-	/**
-	 * Liefert den Verzeichnispfad
-	 * 
-	 * @return string
-	 */
-	public function getParth() {
-		return $this->path;
-	}
-	
-	/**
-	 * Liefert den Verzeichnisnamen
-	 * 
-	 * @return string
-	 */
-	public function getName() {
-		return basename($this->path);
-	}
-	
-	/**
-	 * Liefert die Unterverzeichnisse
-	 * 
-	 * @return multitype:hobulib_Utils_Directory 
-	 */
-	public function readDirectories() {
-		$directories = array();
-		if ($handle = opendir($this->path)) {
-	
-			while (false !== ($dir = readdir($handle))) {
-				if(!is_dir($this->path.'/'.$dir)) {
-					continue;
-				}
-				
-				if(in_array($dir, array('.', '..'))) {
-					continue;
-				}
-					
-				$directories[] = new hobulib_Utils_Directory($this->path.'/'.$dir);
-			}
-	
-			closedir($handle);
-		}
-		return $directories;
-	}
-	
-	/**
-	 * Existiert die Datei in dem Ordner
-	 * 
-	 * @param string $filename
-	 * @return boolean
-	 */
-	public function existsFile($filename) {
-		return file_exists($this->getParth().DIRECTORY_SEPARATOR.$filename);
-	}
+    /**
+     * @var string
+     */
+    private ?string $path = null;
+
+    /**
+     * Directory Utils Constructor
+     * 
+     * @param string $path
+     * @throws hobucms_Exception
+     */
+    public function __construct(string $path)
+    {
+        if (!is_dir($path)) {
+            throw new UnexpectedValueException("'$path' is no directory");
+        }
+
+        $this->path = $path;
+    }
+
+    /**
+     * Read only files from directory
+     * 
+     * @return array 
+     */
+    public function readFiles(): array
+    {
+        $files = array();
+        $handle = opendir($this->path);
+        if ($handle) {
+
+            while (false !== ($file = readdir($handle))) {
+                if (is_dir($this->path . '/' . $file)) {
+                    continue;
+                }
+
+                $files[] = $file;
+            }
+
+            closedir($handle);
+        }
+        return $files;
+    }
+
+    /**
+     * Get directory path
+     * 
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * Get directory base name
+     * 
+     * @return string
+     */
+    public function getName(): string
+    {
+        return basename($this->path);
+    }
+
+    /**
+     * Get sub directories
+     * 
+     * @return hobulib_Utils_Directory[]
+     */
+    public function getSubDirectories(): array
+    {
+        $directories = array();
+        $handle = opendir($this->path);
+        if ($handle) {
+
+            while (false !== ($dir = readdir($handle))) {
+                if (!is_dir($this->path . '/' . $dir)) {
+                    continue;
+                }
+
+                if (in_array($dir, array('.', '..')) === true) {
+                    continue;
+                }
+
+                $directories[] = new hobulib_Utils_Directory($this->path . '/' . $dir);
+            }
+
+            closedir($handle);
+        }
+        return $directories;
+    }
+
+    /**
+     * If the file exists in the folder
+     * 
+     * @param string $filename
+     * @return bool
+     */
+    public function existsFile($filename): bool
+    {
+        return file_exists($this->getPath() . DIRECTORY_SEPARATOR . $filename);
+    }
+
 }

@@ -1,35 +1,34 @@
 <?php
 
-// ############################################################################
-// *										   				 				  *											
-// *                      Copyright (C) 2013 HoBuTech		 				  *
-// *										   				 				  *
-// ############################################################################
-// *										
-// * 
-// *
-// ****************************************************************************
+/*
+ * 
+ * (c) xt <Bastian Hohmann> 
+ * 
+ * @link http://www.xovatec.de
+ * 
+ */
 
 namespace De\Xovatec\Utils;
 
 /**
  * Array Utils
  * 
- * @author bhohmann
- * @copyright hobutech // www.hobutech.de
+ * @author Bastian Hohmann <xt>
+ * @copyright xovatec // www.xovatec.de
  *
  */
-class ArrayUtils {
+class ArrayUtils
+{
 
     /**
-     * Verbindet Array-Elemente zu einem String,<br>
-     * aber loescht vorher leere Eintrage aus dem Array
+     * Join array content to an string<br>
+     * and deletes empty entries from the array
      * 
      * @param string $glue
      * @param array $pieces
      * @return string
      */
-    public static function implode($glue, array $pieces)
+    public static function implode(string $glue, array $pieces): string
     {
 
         $tmpArray = self::removeEmpty($pieces);
@@ -38,12 +37,12 @@ class ArrayUtils {
     }
 
     /**
-     * Prüft, ob die Keys alles Zahlen sind
+     * Checks if the keys are all numbers
      * 
      * @param array $array
-     * @return boolean
+     * @return bool
      */
-    public static function isNumericKeys(array $array)
+    public static function isNumericKeys(array $array): bool
     {
         foreach ($array as $key => $value) {
             if (!is_numeric($key)) {
@@ -54,12 +53,12 @@ class ArrayUtils {
     }
 
     /**
-     * Leert leere Eintraege aus dem Array
+     * Remove empty value of an array
      * 
      * @param array $array
      * @return array
      */
-    public static function removeEmpty(array $array)
+    public static function removeEmpty(array $array): array
     {
 
         $tmpArray = array();
@@ -74,12 +73,12 @@ class ArrayUtils {
     }
 
     /**
-     * Beinhaltet der erste Eintrag ein Array?
+     * Contains the first array value also an array
      * 
      * @param array $array
-     * @return boolean
+     * @return bool
      */
-    public static function isRecursive(array $array)
+    public static function isRecursive(array $array): bool
     {
         if (is_array(current($array))) {
             return true;
