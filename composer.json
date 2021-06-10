@@ -14,13 +14,13 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
-        "monolog/monolog": "^2.2",
         "php-mock/php-mock": "^2.3",
         "phpunitgen/console": "*"
     },
     "autoload": {
         "psr-4": {
-            "De\\Xovatec\\Utils\\": "Utils"
+            "De\\Xovatec\\Utils\\": "src\\Utils",
+            "De\\Xovatec\\Dto\\": "src\\Dto"
         }
     }
 }

@@ -8,42 +8,21 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class VariableUtilsTest.
  *
- * @author bhohmann
- * @copyright hobutech // www.hobutech.de
+ * @author Bastian Hohmann <xt>
+ * @copyright xovatec // www.xovatec.de
  *
  * @covers \De\Xovatec\Utils\VariableUtils
  */
 class VariableUtilsTest extends TestCase
 {
-    /**
-     * @var VariableUtils
-     */
-    protected $variableUtils;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
+    public function testToggle(): void
     {
-        parent::setUp();
-
-        /** @todo Correctly instantiate tested object to use it. */
-        $this->variableUtils = new VariableUtils();
+        $var1 = 'bla';
+        $var2 = 'blub';
+        VariableUtils::toggle($var1, $var2);
+        $this->assertEquals('bla', $var2);
+        $this->assertEquals('blub', $var1);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->variableUtils);
-    }
-
-    public function testToogle(): void
-    {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
-    }
 }

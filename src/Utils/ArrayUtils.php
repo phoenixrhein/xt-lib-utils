@@ -20,6 +20,11 @@ namespace De\Xovatec\Utils;
 class ArrayUtils
 {
 
+    final private function __construct()
+    {
+        //not allowed;
+    }
+
     /**
      * Join array content to an string<br>
      * and deletes empty entries from the array
@@ -30,7 +35,6 @@ class ArrayUtils
      */
     public static function implode(string $glue, array $pieces): string
     {
-
         $tmpArray = self::removeEmpty($pieces);
 
         return implode($glue, $tmpArray);
@@ -44,7 +48,7 @@ class ArrayUtils
      */
     public static function isNumericKeys(array $array): bool
     {
-        foreach ($array as $key => $value) {
+        foreach (array_keys($array) as $key) {
             if (!is_numeric($key)) {
                 return false;
             }
@@ -64,7 +68,7 @@ class ArrayUtils
         $tmpArray = array();
 
         foreach ($array as $value) {
-            if ($value) {
+            if (strlen($value) > 0) {
                 $tmpArray[] = $value;
             }
         }
@@ -88,5 +92,3 @@ class ArrayUtils
     }
 
 }
-
-?>

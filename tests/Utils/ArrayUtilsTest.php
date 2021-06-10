@@ -15,53 +15,79 @@ use PHPUnit\Framework\TestCase;
  */
 class ArrayUtilsTest extends TestCase
 {
-    /**
-     * @var ArrayUtils
-     */
-    protected $arrayUtils;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        /** @todo Correctly instantiate tested object to use it. */
-        $this->arrayUtils = new ArrayUtils();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->arrayUtils);
-    }
 
     public function testImplode(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $array = [
+            'Hallo',
+            '',
+            'Welt'
+        ];
+        $string = ArrayUtils::implode(',', $array);
+
+        $expectedString = "Hallo,Welt";
+        $this->assertEquals($expectedString, $string);
     }
 
-    public function testIsNumericKeys(): void
+    public function testIsNumericKeysSuccess(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $array = [
+            '1' => 'eins',
+            '3' => 'drei',
+            4 => 'vier'
+        ];
+        $result = ArrayUtils::isNumericKeys($array);
+        $this->assertTrue($result);
+    }
+
+    public function testIsNumericKeysFail(): void
+    {
+        $array = [
+            '1' => 'eins',
+            '3' => 'drei',
+            4 => 'vier',
+            'zeichen' => 'keine Nummer'
+        ];
+        $result = ArrayUtils::isNumericKeys($array);
+        $this->assertEquals(false, $result);
     }
 
     public function testRemoveEmpty(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $arrayWithEmpty = [
+            'Hallo',
+            '',
+            'Welt'
+        ];
+
+        $arrayWithoutEmpty = [
+            'Hallo',
+            'Welt'
+        ];
+
+        $cleanedArray = ArrayUtils::removeEmpty($arrayWithEmpty);
+
+        $this->assertEquals($arrayWithoutEmpty, $cleanedArray);
+    }
+
+    public function testIsRecursiveSuccess(): void
+    {
+        $array = [
+            [
+                "Recursive"
+            ]
+        ];
+
+        $this->assertTrue(ArrayUtils::isRecursive($array));
     }
 
     public function testIsRecursive(): void
     {
-        /** @todo This test is incomplete. */
-        $this->markTestIncomplete();
+        $array = [
+            "No Recursive"
+        ];
+
+        $this->assertEquals(false, ArrayUtils::isRecursive($array));
     }
+
 }

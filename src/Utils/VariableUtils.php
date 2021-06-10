@@ -1,38 +1,39 @@
 <?php
-// ############################################################################
-// *										   				 				  *											
-// *                      Copyright (C) 2013 HoBuTech		 				  *
-// *										   				 				  *
-// ############################################################################
-// *										
-// * 
-// *
-// ****************************************************************************
+
+/*
+ * 
+ * (c) xt <Bastian Hohmann> 
+ * 
+ * @link http://www.xovatec.de
+ * 
+ */
 
 namespace De\Xovatec\Utils;
 
 /**
- * Variablen Util-Klasse
+ * Variable Utils
  * 
- * @author bhohmann
- * @copyright hobutech // www.hobutech.de
+ * @author Bastian Hohmann <xt>
+ * @copyright xovatec // www.xovatec.de
  *
  */
-class VariableUtils {
-	
-	
-	/**
-	 * Tauscht den Inhalt in den Variablen
-	 * 
-	 * @param mixed $var1
-	 * @param mixed $var2
-	 */
-	public static function toogle(&$var1, &$var2) {
-		
-		$temp = $var1;
-		$var1 = $var2;
-		$var2 = $temp;
-	}
+class VariableUtils
+{
+
+    /**
+     * Toggle the content in the variables
+     * 
+     * @param mixed $var1
+     * @param mixed $var2
+     * @return void
+     */
+    public static function toggle(&$var1, &$var2): void
+    {
+        $temp = $var1;
+        $var1 = $var2;
+        $var2 = $temp;
+    }
+
 }
 
 ?>

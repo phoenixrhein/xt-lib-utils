@@ -31,12 +31,12 @@ class DirectoryUtils
      * Directory Utils Constructor
      * 
      * @param string $path
-     * @throws hobucms_Exception
+     * @throws UnexpectedValueException
      */
     public function __construct(string $path)
     {
         if (!is_dir($path)) {
-            throw new UnexpectedValueException("'$path' is no directory");
+            throw new UnexpectedValueException("'{$path}' is no directory");
         }
 
         $this->path = $path;
@@ -54,7 +54,7 @@ class DirectoryUtils
         if ($handle) {
 
             while (false !== ($file = readdir($handle))) {
-                if (is_dir($this->path . '/' . $file)) {
+                if (is_dir($this->path . DIRECTORY_SEPARATOR . $file)) {
                     continue;
                 }
 
@@ -89,7 +89,7 @@ class DirectoryUtils
     /**
      * Get sub directories
      * 
-     * @return hobulib_Utils_Directory[]
+     * @return DirectoryUtils[]
      */
     public function getSubDirectories(): array
     {
@@ -98,15 +98,11 @@ class DirectoryUtils
         if ($handle) {
 
             while (false !== ($dir = readdir($handle))) {
-                if (!is_dir($this->path . '/' . $dir)) {
+                if (!is_dir($this->path . DIRECTORY_SEPARATOR . $dir) || in_array($dir, array('.', '..')) === true) {
                     continue;
                 }
 
-                if (in_array($dir, array('.', '..')) === true) {
-                    continue;
-                }
-
-                $directories[] = new hobulib_Utils_Directory($this->path . '/' . $dir);
+                $directories[] = new DirectoryUtils($this->path . DIRECTORY_SEPARATOR . $dir);
             }
 
             closedir($handle);
@@ -120,7 +116,7 @@ class DirectoryUtils
      * @param string $filename
      * @return bool
      */
-    public function existsFile($filename): bool
+    public function existsFile(string $filename): bool
     {
         return file_exists($this->getPath() . DIRECTORY_SEPARATOR . $filename);
     }
